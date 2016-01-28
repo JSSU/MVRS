@@ -9,28 +9,16 @@ namespace MVRS
 {
     public partial class _default : System.Web.UI.Page
     {
+        IQueryable<MVR> DListAll = null;
         DPW_OBC_PrequalMVRS dbcontext = new DPW_OBC_PrequalMVRS();
+        
         protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!IsPostBack)
-            {
-            }
-        }
-
-        //this is for search btn
-        //protected void BtnSearch(object sender, EventArgs e)
-        //{
-        //    inputfrom.Text = datetimepickerFrom.Value;
-        //    inputto.Text = datetimepickerTo.Value;
-        //}
-
-        protected void BtnGrid(object sender, EventArgs e)
         {
             string s = accountsearch.Value;
             lblerrobox.Text = "";
-            IQueryable<MVR> DListAll=null;
+
             if (datetimepickerFrom.Value == "" && datetimepickerTo.Value == "" && s == "")
-                lblerrobox.Text = "No input...";
+                lblerrobox.Text = "No input";
             else if (datetimepickerFrom.Value == "" && datetimepickerTo.Value == "" && s != "")
             {
                 DListAll = (from u in dbcontext.MVRS
@@ -105,8 +93,22 @@ namespace MVRS
             }
             else { DListAll = null; }
             //TotalResult.Text = typeof(DataList).ToString(); //(System.Web.UI.WebControls.DataList)
-            
 
+            if (!IsPostBack)
+            {
+                lblerrobox.Text = "";
+            }
+        }
+
+        //this is for search btn
+        //protected void BtnSearch(object sender, EventArgs e)
+        //{
+        //    inputfrom.Text = datetimepickerFrom.Value;
+        //    inputto.Text = datetimepickerTo.Value;
+        //}
+
+        protected void BtnGrid(object sender, EventArgs e)
+        {
             //output
             if (DListAll != null)
             {
@@ -129,6 +131,38 @@ namespace MVRS
                                     TextPrompt = u.textPrompt
                                 }).ToList();
                 GVResult.DataSource = datalist;
+                GVResult.DataBind();
+                TotalResult.Text = datalist.Count.ToString();
+            }
+            else { }
+
+        }
+
+        protected void GVResult_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            if (DListAll != null)
+            {
+                var datalist = (from u in DListAll
+
+                                select new
+                                {
+                                    AccountNumber = u.accountNumber,
+                                    MeterNumber = u.meterNumber,
+                                    Comment = u.comment,
+                                    Read = u.rdgRead,
+                                    ReadDate = u.readDate.ToString().Substring(0, 10),
+                                    ReadTime = u.readTime,
+                                    ReadCode = u.readCode,
+                                    SkipCode = u.skipCode,
+                                    TCode1 = u.tCode1,
+                                    TCode2 = u.tCode2,
+                                    MReaderID = u.mReaderId,
+                                    PrevRead = u.preReading,
+                                    ReadMethod = u.readMethod,
+                                    TextPrompt = u.textPrompt
+                                }).ToList();
+                GVResult.DataSource = datalist;
+                GVResult.PageIndex = e.NewPageIndex;
                 GVResult.DataBind();
                 TotalResult.Text = datalist.Count.ToString();
             }

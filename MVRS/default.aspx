@@ -134,7 +134,9 @@
         <asp:Label ID="TotalResult" runat="server" Text=""></asp:Label>
 
     </div>
-    <asp:GridView ID="GVResult" class="table table-hover table-striped" runat="server" AllowCustomPaging="True"></asp:GridView>
+    <asp:GridView ID="GVResult" class="table table-hover table-striped" runat="server"
+                  AllowPaging="True" 
+                  PageSize="5" AllowSorting="True" OnPageIndexChanging="GVResult_PageIndexChanging" ></asp:GridView>
 
 <!-- success box-->
     <!-- Bootstrap core JavaScript
