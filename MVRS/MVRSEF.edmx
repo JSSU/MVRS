@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model_MVRS.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MVRS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="accountNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="meterNumber" Type="nvarchar" MaxLength="20" />
+          <Property Name="comment" Type="nvarchar" MaxLength="255" />
+          <Property Name="rdgRead" Type="nvarchar" MaxLength="20" />
+          <Property Name="readDate" Type="date" />
+          <Property Name="readTime" Type="time" Precision="0" />
+          <Property Name="readCode" Type="nvarchar" MaxLength="5" />
+          <Property Name="skipCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="tCode1" Type="nvarchar" MaxLength="50" />
+          <Property Name="tCode2" Type="nvarchar" MaxLength="50" />
+          <Property Name="mReaderId" Type="nvarchar" MaxLength="20" />
+          <Property Name="readType" Type="nvarchar" MaxLength="10" />
+          <Property Name="preReading" Type="nvarchar" MaxLength="50" />
+          <Property Name="readMethod" Type="nvarchar" MaxLength="10" />
+          <Property Name="textPrompt" Type="nvarchar" MaxLength="20" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityContainer Name="Model_MVRSStoreContainer">
+          <EntitySet Name="MVRS" EntityType="Self.MVRS" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model_MVRS" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="MVR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="accountNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="meterNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="comment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rdgRead" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="readDate" Type="DateTime" Precision="0" />
+          <Property Name="readTime" Type="Time" Precision="0" />
+          <Property Name="readCode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="skipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="tCode1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tCode2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mReaderId" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="readType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="preReading" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FileName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="readMethod" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="textPrompt" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="DPW_OBC_PrequalMVRS" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MVRS" EntityType="Self.MVR" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Model_MVRSStoreContainer" CdmEntityContainer="DPW_OBC_PrequalMVRS">
+          <EntitySetMapping Name="MVRS">
+            <EntityTypeMapping TypeName="Model_MVRS.MVR">
+              <MappingFragment StoreEntitySet="MVRS">
+                <ScalarProperty Name="textPrompt" ColumnName="textPrompt" />
+                <ScalarProperty Name="readMethod" ColumnName="readMethod" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="accountNumber" ColumnName="accountNumber" />
+                <ScalarProperty Name="meterNumber" ColumnName="meterNumber" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="rdgRead" ColumnName="rdgRead" />
+                <ScalarProperty Name="readDate" ColumnName="readDate" />
+                <ScalarProperty Name="readTime" ColumnName="readTime" />
+                <ScalarProperty Name="readCode" ColumnName="readCode" />
+                <ScalarProperty Name="skipCode" ColumnName="skipCode" />
+                <ScalarProperty Name="tCode1" ColumnName="tCode1" />
+                <ScalarProperty Name="tCode2" ColumnName="tCode2" />
+                <ScalarProperty Name="mReaderId" ColumnName="mReaderId" />
+                <ScalarProperty Name="readType" ColumnName="readType" />
+                <ScalarProperty Name="preReading" ColumnName="preReading" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
