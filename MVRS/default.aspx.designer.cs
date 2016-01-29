@@ -49,13 +49,13 @@ namespace MVRS {
         protected global::System.Web.UI.HtmlControls.HtmlInputText datetimepickerTo;
         
         /// <summary>
-        /// testgrid control.
+        /// searchgridBTN control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton testgrid;
+        protected global::System.Web.UI.WebControls.LinkButton searchgridBTN;
         
         /// <summary>
         /// lblerrobox control.

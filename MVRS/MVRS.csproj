@@ -105,6 +105,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AnotherImplement.aspx" />
+    <Content Include="js\jquery-2.1.1.min.js" />
+    <Content Include="js\position-calculator.min.js" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
