@@ -107,6 +107,7 @@
     <Content Include="AnotherImplement.aspx" />
     <Content Include="js\jquery-2.1.1.min.js" />
     <Content Include="js\position-calculator.min.js" />
+    <Content Include="js\scrollsaver.js" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1018,6 +1019,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="images\pager\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

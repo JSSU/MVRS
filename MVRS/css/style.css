@@ -126,3 +126,15 @@ label{
     z-index: 99;
 }
 /*For Toolstip end*/
+
+/*Fix scroll start*/
+    .fixedDiv
+    {
+       position: fixed;
+    }
+
+    .clear
+    {
+       clear: both;
+    }
+/*Fix scroll end*/

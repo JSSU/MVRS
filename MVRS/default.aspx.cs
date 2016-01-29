@@ -14,6 +14,7 @@ namespace MVRS
         
         protected void Page_Load(object sender, EventArgs e)
         {
+
             string s = accountsearch.Value;
             lblerrobox.Text = "";
 
@@ -93,11 +94,18 @@ namespace MVRS
             }
             else { DListAll = null; }
             //TotalResult.Text = typeof(DataList).ToString(); //(System.Web.UI.WebControls.DataList)
-
             if (!IsPostBack)
             {
                 lblerrobox.Text = "";
             }
+            //paging start
+            GVResult.DataBound += GVResult_DataBound;
+            GridViewRow row = GVResult.BottomPagerRow;
+            if (row == null) return;
+            DropDownList pages = (DropDownList)row.Cells[0].FindControl("pages");
+            pages.SelectedIndexChanged += OnSelectedIndexChanged;
+            //paging end
+
         }
 
         //this is for search btn
@@ -109,12 +117,15 @@ namespace MVRS
 
         protected void BtnGrid(object sender, EventArgs e)
         {
+            GVResult.AllowPaging = true;
+            GVResult.PageSize = 15;
             //output
             if (DListAll != null)
             {
                 var datalist = (from u in DListAll
 
-                                select new {
+                                select new
+                                {
                                     AccountNumber = u.accountNumber,
                                     MeterNumber = u.meterNumber,
                                     Comment = u.comment,
@@ -134,8 +145,8 @@ namespace MVRS
                 GVResult.DataBind();
                 TotalResult.Text = datalist.Count.ToString();
             }
-            else { }
-
+            else { GVResult.DataBind(); }
+           
         }
 
         protected void GVResult_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -168,6 +179,119 @@ namespace MVRS
             }
             else { }
 
+        }
+
+        protected void GVResult_DataBound(object sender, EventArgs e)
+        {
+            //for paging
+            GridViewRow row = GVResult.BottomPagerRow;
+            if (row == null) return;
+            DropDownList pages = (DropDownList)row.Cells[0].FindControl("pages");
+            pages.SelectedIndexChanged += OnSelectedIndexChanged;
+            Label count = (Label)row.Cells[0].FindControl("count");
+            if (pages != null)
+            {
+                // populate pager
+                for (int i = 0; i < GVResult.PageCount; i++)
+                {
+                    int pageNumber = i + 1;
+                    ListItem pageItem = new ListItem(pageNumber.ToString());
+                    if (i == GVResult.PageIndex) pageItem.Selected = true;
+                    pages.Items.Add(pageItem);
+                }
+            }
+            // populate page count
+            if (count != null)
+            {
+                count.Text = string.Format("<b>{0}</b>", GVResult.PageCount);
+            }
+            LinkButton prev = (LinkButton)row.Cells[0].FindControl("prev");
+            LinkButton next = (LinkButton)row.Cells[0].FindControl("next");
+            LinkButton first = (LinkButton)row.Cells[0].FindControl("first");
+            LinkButton last = (LinkButton)row.Cells[0].FindControl("last");
+            // set the pager nav state based on the current page❺
+            if (GVResult.PageIndex == 0)
+            {
+                prev.Enabled = false;
+                first.Enabled = false;
+            }
+            else if (GVResult.PageIndex + 1 == GVResult.PageCount)
+            {
+                last.Enabled = false;
+                next.Enabled = false;
+            }
+            else
+            {
+                last.Enabled = true;
+                next.Enabled = true;
+                prev.Enabled = true;
+                first.Enabled = true;
+            }
+        }
+        protected void OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow pager = GVResult.BottomPagerRow;
+            DropDownList pages = (DropDownList)pager.Cells[0].FindControl("pages");
+            GVResult.PageIndex = pages.SelectedIndex;
+            // a method to populate your grid
+            if (DListAll != null)
+            {
+                var datalist = (from u in DListAll
+
+                                select new
+                                {
+                                    AccountNumber = u.accountNumber,
+                                    MeterNumber = u.meterNumber,
+                                    Comment = u.comment,
+                                    Read = u.rdgRead,
+                                    ReadDate = u.readDate.ToString().Substring(0, 10),
+                                    ReadTime = u.readTime,
+                                    ReadCode = u.readCode,
+                                    SkipCode = u.skipCode,
+                                    TCode1 = u.tCode1,
+                                    TCode2 = u.tCode2,
+                                    MReaderID = u.mReaderId,
+                                    PrevRead = u.preReading,
+                                    ReadMethod = u.readMethod,
+                                    TextPrompt = u.textPrompt
+                                }).ToList();
+                GVResult.DataSource = datalist;
+                GVResult.DataBind();
+                TotalResult.Text = datalist.Count.ToString();
+            }
+            else { }
+        }
+
+        protected void showall_btn(object sender, EventArgs e)
+        {
+            GVResult.AllowPaging = false;
+            //output
+            if (DListAll != null)
+            {
+                var datalist = (from u in DListAll
+
+                                select new
+                                {
+                                    AccountNumber = u.accountNumber,
+                                    MeterNumber = u.meterNumber,
+                                    Comment = u.comment,
+                                    Read = u.rdgRead,
+                                    ReadDate = u.readDate.ToString().Substring(0, 10),
+                                    ReadTime = u.readTime,
+                                    ReadCode = u.readCode,
+                                    SkipCode = u.skipCode,
+                                    TCode1 = u.tCode1,
+                                    TCode2 = u.tCode2,
+                                    MReaderID = u.mReaderId,
+                                    PrevRead = u.preReading,
+                                    ReadMethod = u.readMethod,
+                                    TextPrompt = u.textPrompt
+                                }).ToList();
+                GVResult.DataSource = datalist;
+                GVResult.DataBind();
+                TotalResult.Text = datalist.Count.ToString();
+            }
+            else { GVResult.DataBind(); }
         }
     }
 }

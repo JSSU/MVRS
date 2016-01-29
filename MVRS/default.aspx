@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="MVRS._default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="MVRS._default"  maintainScrollPositionOnPostback="True"%>
 <html lang="en">
 <head>
     <title></title>
@@ -15,6 +15,7 @@
     <!-- Load jQuery plugin: PositionCalculator -->
     <script src="js/position-calculator.min.js"></script>
     <!-- Load jQuery plugin: PositionCalculator -->
+
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link rel="icon" href="icons/form.ico">
     <style>
@@ -109,10 +110,11 @@
                      </div>
                 </div>
 <%--End datetime--%>
+
                 <div class="col-md-12 btn-topdown">
                 <%--<asp:LinkButton ID="Search" CssClass="btn btn-default" runat="server" OnClick="BtnSearch">Search</asp:LinkButton>--%>
             <%--dropdown start--%>
-                  <div id="test" class="container" style="text-align:center; float:left">
+                  <div id="test" class="container" style="text-align:center; float:left; display:none;">
                     <div class="btn-group-vertical">
                       <div class="btn-group">
                           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Default 
@@ -152,7 +154,7 @@
     </div>        
 
 
-<%--        <div class="dropdown" style="text-align:center;">
+<%--    <div class="dropdown" style="text-align:center;">
           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             Dropdown
             <span class="caret"></span>
@@ -164,16 +166,63 @@
             <li role="separator" class="divider"></li>
             <li><a href="#">Show All</a></li>
           </ul>
-        </div>--%>
+        </div>--%> 
+    <%--auto focus when post back starting here --%>
+<%--    <asp:ScriptManager ID="ScriptManager" runat="server" ScriptMode="Release" />
+    <script type="text/javascript">
+        var xPos, yPos;
+        var prm = Sys.
+        function BeginRequestHandler(sender, args) {
+            if ($get('<%= GVResult.ClientID %>')!=null){
+                xPos = $get('<%= GVResult.ClientID %>').scrollLeft;
+                yPos = $get('<%= GVResult.ClientID %>').scrolltop;
+            }
+        }
+        function EndRequestHandler(sender, args) {
+            if ($get('<%= GVResult.ClientID %>') != null) {
+                $get('<%= GVResult.ClientID %>').scrollLeft=xPos;
+                $get('<%= GVResult.ClientID %>').scrolltop=yPos;
+            }
+        }
+        
+    </script>--%>
+    <%--auto focus when post back ending here --%>
+
+    <%--OnSelectedIndexChanged="OnSelectedIndexChanged" OnDataBound="GVResult_DataBound"--%>
     <asp:GridView ID="GVResult" class="table table-hover table-striped" runat="server"
-                  AllowPaging="True" 
-                  PageSize="15" AllowSorting="True" OnPageIndexChanging="GVResult_PageIndexChanging" ></asp:GridView>
+        AllowPaging="True"
+        AllowSorting="True"
+        EmptyDataText="No data."
+        OnPageIndexChanging="GVResult_PageIndexChanging"  
+        
+        PageSize="15" >
+        <PagerStyle Height="8px" HorizontalAlign="Center" />
+        <PagerTemplate>
+            <asp:LinkButton ID="first" runat="server" Text="<< First"
+                CommandArgument="First" CommandName="Page" />
+            <asp:LinkButton ID="prev" runat="server" Text="< Previous"
+                CommandArgument="Prev"
+                CommandName="Page" />
+              Page <asp:DropDownList ID="pages" runat="server"
+                AutoPostBack="True" /> of <asp:Label ID="count" 
+                  runat="server" />
+            <asp:LinkButton ID="next" runat="server" Text="Next >"
+                CommandArgument="Next" CommandName="Page" />
+            <asp:LinkButton ID="last" runat="server" Text="Last >>" 
+                CommandArgument="Last" CommandName="Page" />
+            <asp:LinkButton ID="showall" CssClass="btn btn-info" runat="server" OnClick="showall_btn">List All</asp:LinkButton>
+
+        </PagerTemplate>
+    </asp:GridView>
 
 
 <!-- success box-->
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <%--scroll fix start--%>
+    <script src="js/scrollsaver.js"></script>
+    <%--scroll fix end--%>
   <script src="js/jquery-ui.js"></script>
   <script type="text/javascript">
       $(document).ready(function () {
