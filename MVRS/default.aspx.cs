@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -97,6 +98,7 @@ namespace MVRS
             if (!IsPostBack)
             {
                 lblerrobox.Text = "";
+
             }
             //paging start
             GVResult.DataBound += GVResult_DataBound;
@@ -142,6 +144,7 @@ namespace MVRS
                                     TextPrompt = u.textPrompt
                                 }).ToList();
                 GVResult.DataSource = datalist;
+                Session["GVTable"] = GVResult.DataSource; //store table view in Session
                 GVResult.DataBind();
                 TotalResult.Text = datalist.Count.ToString();
             }
@@ -151,34 +154,39 @@ namespace MVRS
 
         protected void GVResult_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            if (DListAll != null)
-            {
-                var datalist = (from u in DListAll
+            //if (DListAll != null)
+            //{
+            //    var datalist = (from u in DListAll
 
-                                select new
-                                {
-                                    AccountNumber = u.accountNumber,
-                                    MeterNumber = u.meterNumber,
-                                    Comment = u.comment,
-                                    Read = u.rdgRead,
-                                    ReadDate = u.readDate.ToString().Substring(0, 10),
-                                    ReadTime = u.readTime,
-                                    ReadCode = u.readCode,
-                                    SkipCode = u.skipCode,
-                                    TCode1 = u.tCode1,
-                                    TCode2 = u.tCode2,
-                                    MReaderID = u.mReaderId,
-                                    PrevRead = u.preReading,
-                                    ReadMethod = u.readMethod,
-                                    TextPrompt = u.textPrompt
-                                }).ToList();
-                GVResult.DataSource = datalist;
+            //                    select new
+            //                    {
+            //                        AccountNumber = u.accountNumber,
+            //                        MeterNumber = u.meterNumber,
+            //                        Comment = u.comment,
+            //                        Read = u.rdgRead,
+            //                        ReadDate = u.readDate.ToString().Substring(0, 10),
+            //                        ReadTime = u.readTime,
+            //                        ReadCode = u.readCode,
+            //                        SkipCode = u.skipCode,
+            //                        TCode1 = u.tCode1,
+            //                        TCode2 = u.tCode2,
+            //                        MReaderID = u.mReaderId,
+            //                        PrevRead = u.preReading,
+            //                        ReadMethod = u.readMethod,
+            //                        TextPrompt = u.textPrompt
+            //                    }).ToList();
+            //    GVResult.DataSource = datalist;
+            //    GVResult.PageIndex = e.NewPageIndex;
+            //    GVResult.DataBind();
+            //    TotalResult.Text = datalist.Count.ToString();
+            //}
+            //else { }
+            if (Session["GVTable"] != null)
+            {
+                GVResult.DataSource = Session["GVTable"];
                 GVResult.PageIndex = e.NewPageIndex;
                 GVResult.DataBind();
-                TotalResult.Text = datalist.Count.ToString();
             }
-            else { }
-
         }
 
         protected void GVResult_DataBound(object sender, EventArgs e)
@@ -233,65 +241,117 @@ namespace MVRS
             GridViewRow pager = GVResult.BottomPagerRow;
             DropDownList pages = (DropDownList)pager.Cells[0].FindControl("pages");
             GVResult.PageIndex = pages.SelectedIndex;
-            // a method to populate your grid
-            if (DListAll != null)
-            {
-                var datalist = (from u in DListAll
+            //// a method to populate your grid
+            //if (DListAll != null)
+            //{
+            //    var datalist = (from u in DListAll
 
-                                select new
-                                {
-                                    AccountNumber = u.accountNumber,
-                                    MeterNumber = u.meterNumber,
-                                    Comment = u.comment,
-                                    Read = u.rdgRead,
-                                    ReadDate = u.readDate.ToString().Substring(0, 10),
-                                    ReadTime = u.readTime,
-                                    ReadCode = u.readCode,
-                                    SkipCode = u.skipCode,
-                                    TCode1 = u.tCode1,
-                                    TCode2 = u.tCode2,
-                                    MReaderID = u.mReaderId,
-                                    PrevRead = u.preReading,
-                                    ReadMethod = u.readMethod,
-                                    TextPrompt = u.textPrompt
-                                }).ToList();
-                GVResult.DataSource = datalist;
-                GVResult.DataBind();
-                TotalResult.Text = datalist.Count.ToString();
-            }
-            else { }
+            //                    select new
+            //                    {
+            //                        AccountNumber = u.accountNumber,
+            //                        MeterNumber = u.meterNumber,
+            //                        Comment = u.comment,
+            //                        Read = u.rdgRead,
+            //                        ReadDate = u.readDate.ToString().Substring(0, 10),
+            //                        ReadTime = u.readTime,
+            //                        ReadCode = u.readCode,
+            //                        SkipCode = u.skipCode,
+            //                        TCode1 = u.tCode1,
+            //                        TCode2 = u.tCode2,
+            //                        MReaderID = u.mReaderId,
+            //                        PrevRead = u.preReading,
+            //                        ReadMethod = u.readMethod,
+            //                        TextPrompt = u.textPrompt
+            //                    }).ToList();
+            //    GVResult.DataSource = datalist;
+            //    GVResult.DataBind();
+            //    TotalResult.Text = datalist.Count.ToString();
+            //}
+            //else { }
+            GVResult.DataSource = Session["GVTable"];
+            GVResult.DataBind();
         }
 
-        protected void showall_btn(object sender, EventArgs e)
+        protected void showall_btn(object sender, EventArgs e) //Show all the data on the list 
         {
             GVResult.AllowPaging = false;
-            //output
-            if (DListAll != null)
-            {
-                var datalist = (from u in DListAll
+            ////output
+            //if (DListAll != null)
+            //{
+            //    var datalist = (from u in DListAll
 
-                                select new
-                                {
-                                    AccountNumber = u.accountNumber,
-                                    MeterNumber = u.meterNumber,
-                                    Comment = u.comment,
-                                    Read = u.rdgRead,
-                                    ReadDate = u.readDate.ToString().Substring(0, 10),
-                                    ReadTime = u.readTime,
-                                    ReadCode = u.readCode,
-                                    SkipCode = u.skipCode,
-                                    TCode1 = u.tCode1,
-                                    TCode2 = u.tCode2,
-                                    MReaderID = u.mReaderId,
-                                    PrevRead = u.preReading,
-                                    ReadMethod = u.readMethod,
-                                    TextPrompt = u.textPrompt
-                                }).ToList();
-                GVResult.DataSource = datalist;
-                GVResult.DataBind();
-                TotalResult.Text = datalist.Count.ToString();
-            }
-            else { GVResult.DataBind(); }
+            //                    select new
+            //                    {
+            //                        AccountNumber = u.accountNumber,
+            //                        MeterNumber = u.meterNumber,
+            //                        Comment = u.comment,
+            //                        Read = u.rdgRead,
+            //                        ReadDate = u.readDate.ToString().Substring(0, 10),
+            //                        ReadTime = u.readTime,
+            //                        ReadCode = u.readCode,
+            //                        SkipCode = u.skipCode,
+            //                        TCode1 = u.tCode1,
+            //                        TCode2 = u.tCode2,
+            //                        MReaderID = u.mReaderId,
+            //                        PrevRead = u.preReading,
+            //                        ReadMethod = u.readMethod,
+            //                        TextPrompt = u.textPrompt
+            //                    }).ToList();
+            //    GVResult.DataSource = datalist;
+            //    GVResult.DataBind();
+            //    TotalResult.Text = datalist.Count.ToString();
+            //}
+            //else { GVResult.DataBind(); }
+            GVResult.DataSource = Session["GVTable"];
+            GVResult.DataBind();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void GVResult_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            
+            DataTable dt = Session["GVTable"] as DataTable;
+            if (dt != null)
+            {
+                //sort the data
+                dt.DefaultView.Sort = e.SortExpression + " " + GetSortDirection(e.SortExpression);
+                GVResult.DataSource = Session["GVTable"];
+                GVResult.DataBind();
+            }
+        }
+
+        private string GetSortDirection(string column)
+        {
+            // By default, set the sort direction to ascending.
+            string sortDirection = "ASC";
+
+            // Retrieve the last column that was sorted.
+            string sortExpression = ViewState["SortExpression"] as string;
+
+            if (sortExpression != null)
+            {
+                // Check if the same column is being sorted.
+                // Otherwise, the default value can be returned.
+                if (sortExpression == column)
+                {
+                    string lastDirection = ViewState["SortDirection"] as string;
+                    if ((lastDirection != null) && (lastDirection == "ASC"))
+                    {
+                        sortDirection = "DESC";
+                    }
+                }
+            }
+
+            // Save new values in ViewState.
+            ViewState["SortDirection"] = sortDirection;
+            ViewState["SortExpression"] = column;
+
+            return sortDirection;
+        }
+
     }
 }

@@ -188,10 +188,10 @@
     </script>--%>
     <%--auto focus when post back ending here --%>
 
-    <%--OnSelectedIndexChanged="OnSelectedIndexChanged" OnDataBound="GVResult_DataBound"--%>
+    <%--OnSelectedIndexChanged="OnSelectedIndexChanged" OnDataBound="GVResult_DataBound" AllowSorting="True" OnSorting="GVResult_Sorting"--%>
     <asp:GridView ID="GVResult" class="table table-hover table-striped" runat="server"
         AllowPaging="True"
-        AllowSorting="True"
+        
         EmptyDataText="No data."
         OnPageIndexChanging="GVResult_PageIndexChanging"  
         
@@ -225,11 +225,15 @@
     <%--scroll fix end--%>
   <script src="js/jquery-ui.js"></script>
   <script type="text/javascript">
-      $(document).ready(function () {
-          $('[data-toggle="tooltip"]').tooltip();
+      document.getElementById('accountsearch').addEventListener('keypress', function (event) {
+          if (event.keyCode == 13) {
+                
+          }
       });
       $(document).ready(function () {
+          $('[data-toggle="tooltip"]').tooltip();
           $('[data-toggle="popover"]').popover();
+          //$('#searchgridBTN').focus();
       });
       $(document).ready(function () {
           $('.pop').popover();
