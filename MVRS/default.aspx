@@ -15,7 +15,9 @@
     <!-- Load jQuery plugin: PositionCalculator -->
     <script src="js/position-calculator.min.js"></script>
     <!-- Load jQuery plugin: PositionCalculator -->
-
+    <%--AngularJS--%>
+    <script src="scripts/angular.js"></script>
+    <%--AngularJS--%>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link rel="icon" href="icons/form.ico">
     <style>
@@ -26,6 +28,7 @@
 </head>
 <body>
 <form id="MVRSForm" runat="server">
+
     <div class="container">
          <h1 style="text-align:center">MVRS Meter Reading Search</h1>
 <%--     <h3 style="text-align:center"> <a href="Document/HUL%20file%20codes.docx">Column/Code Definitions</a></h3> --%>

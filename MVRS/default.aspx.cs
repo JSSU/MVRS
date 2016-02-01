@@ -144,7 +144,7 @@ namespace MVRS
                                     TextPrompt = u.textPrompt
                                 }).ToList();
                 GVResult.DataSource = datalist;
-                Session["GVTable"] = GVResult.DataSource; //store table view in Session
+                Session["GVTable"] = datalist; //store table view in Session
                 GVResult.DataBind();
                 TotalResult.Text = datalist.Count.ToString();
             }
@@ -306,11 +306,6 @@ namespace MVRS
             GVResult.DataBind();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         protected void GVResult_Sorting(object sender, GridViewSortEventArgs e)
         {
             
