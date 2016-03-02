@@ -132,6 +132,7 @@ namespace MVRS
                                     MeterNumber = u.meterNumber,
                                     Comment = u.comment,
                                     Read = u.rdgRead,
+                                    Radio_Read = u.radioRead,
                                     ReadDate = u.readDate.ToString().Substring(0, 10),
                                     ReadTime = u.readTime,
                                     ReadCode = u.readCode,
@@ -143,8 +144,7 @@ namespace MVRS
                                     ReadMethod = u.readMethod,
                                     TextPrompt = u.textPrompt,
                                     RF_ERT_ID = u.rfErtId,
-                                    TamperStatus = u.tamperStatus,
-                                    Radio_Read=u.radioRead
+                                    TamperStatus = u.tamperStatus
                                 }).ToList();
                 GVResult.DataSource = datalist;
                 Session["GVTable"] = datalist; //store table view in Session

@@ -54,6 +54,7 @@
                     <p>Meter Number</p>
                     <p>Comment – if a comment is entered by the meter reader</p>
                     <p>Read – the dial read, not including decimal places</p>
+                    <p>Radio_Read – includes decimal places for the raw read</p>
                     <p>Read Date</p>
                     <p>Read Time</p>
                     <p>Read Code:</p>
@@ -80,6 +81,8 @@
                         <li>W – Wand</li>
                     </ul>
                     <p>Text Prompt – text prompt provided to meter reader for type of read</p>
+                    <p>RF_ERT_ID – ERT ID number</p>
+                    <p>TamperStatus – tamper status of the meter</p>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
