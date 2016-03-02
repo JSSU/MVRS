@@ -25,6 +25,9 @@
           <Property Name="preReading" Type="nvarchar" MaxLength="50" />
           <Property Name="readMethod" Type="nvarchar" MaxLength="10" />
           <Property Name="textPrompt" Type="nvarchar" MaxLength="20" />
+          <Property Name="rfErtId" Type="nvarchar" MaxLength="200" />
+          <Property Name="tamperStatus" Type="nvarchar" MaxLength="200" />
+          <Property Name="radioRead" Type="nvarchar" MaxLength="200" />
           <Property Name="FileName" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityContainer Name="Model_MVRSStoreContainer">
@@ -55,6 +58,9 @@
           <Property Name="FileName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="readMethod" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="textPrompt" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="rfErtId" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="tamperStatus" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="radioRead" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="DPW_OBC_PrequalMVRS" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="MVRS" EntityType="Self.MVR" />
@@ -68,6 +74,9 @@
           <EntitySetMapping Name="MVRS">
             <EntityTypeMapping TypeName="Model_MVRS.MVR">
               <MappingFragment StoreEntitySet="MVRS">
+                <ScalarProperty Name="radioRead" ColumnName="radioRead" />
+                <ScalarProperty Name="tamperStatus" ColumnName="tamperStatus" />
+                <ScalarProperty Name="rfErtId" ColumnName="rfErtId" />
                 <ScalarProperty Name="textPrompt" ColumnName="textPrompt" />
                 <ScalarProperty Name="readMethod" ColumnName="readMethod" />
                 <ScalarProperty Name="ID" ColumnName="ID" />

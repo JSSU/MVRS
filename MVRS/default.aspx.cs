@@ -12,7 +12,7 @@ namespace MVRS
     {
         IQueryable<MVR> DListAll = null;
         DPW_OBC_PrequalMVRS dbcontext = new DPW_OBC_PrequalMVRS();
-        
+         
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -141,7 +141,10 @@ namespace MVRS
                                     MReaderID = u.mReaderId,
                                     PrevRead = u.preReading,
                                     ReadMethod = u.readMethod,
-                                    TextPrompt = u.textPrompt
+                                    TextPrompt = u.textPrompt,
+                                    RF_ERT_ID = u.rfErtId,
+                                    TamperStatus = u.tamperStatus,
+                                    Radio_Read=u.radioRead
                                 }).ToList();
                 GVResult.DataSource = datalist;
                 Session["GVTable"] = datalist; //store table view in Session

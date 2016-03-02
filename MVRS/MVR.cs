@@ -31,5 +31,8 @@ namespace MVRS
         public string FileName { get; set; }
         public string readMethod { get; set; }
         public string textPrompt { get; set; }
+        public string rfErtId { get; set; }
+        public string tamperStatus { get; set; }
+        public string radioRead { get; set; }
     }
 }
