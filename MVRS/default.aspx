@@ -69,7 +69,7 @@
                     </ul>
                     <p>Skip Code</p>
                     <p>TCode 1 – Trouble Code 1</p>
-                    <p>TCode 2 – Trouble Code 2</p>
+                     <p>TCode 2 – Trouble Code 2</p>
                     <p>MReaderID – Meter Reader ID</p>
                     <p>PrevRead – the previous read for this meter dial</p>
                     <p>Read Method:</p>
